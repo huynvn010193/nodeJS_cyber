@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app/index.js",
-    "dev": "nodemon app/index.js"
+    "dev": "nodemon app/index.js",
+    "command-test": "node app/index.js test"
   },
   "author": "huynvn",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "yargs": "^17.3.0"
   }
 }
