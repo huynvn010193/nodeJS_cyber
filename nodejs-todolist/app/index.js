@@ -1,8 +1,11 @@
 // import yargs from "yargs"; // es6
+const chalk = require("chalk");
 
 const yargs = require("yargs"); // es5
 const fs = require("fs"); // file system (build in nodeJS);
+
 const {
+  deleteTask,
   readAllTask,
   createTask,
   readDetailTask,
@@ -40,7 +43,7 @@ yargs.command({
   command: "read-all",
   handler: () => {
     const result = readAllTask();
-    console.log(result);
+    console.log(chalk.blue("thành công"), result);
   },
 });
 
@@ -98,7 +101,12 @@ yargs.command({
   },
   handler: (args) => {
     const { id } = args;
-    console.log("delete id", id);
+    const task = deleteTask(id);
+    if (task) {
+      console.log("task delete: ", task);
+    } else {
+      console.log("Not found");
+    }
   },
 });
 
