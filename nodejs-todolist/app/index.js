@@ -1,6 +1,8 @@
 // import yargs from "yargs"; // es6
 
 const yargs = require("yargs"); // es5
+const fs = require("fs"); // file system (build in nodeJS);
+const { readAllTask } = require("./model/task");
 
 // tạo lệnh
 yargs.command({
@@ -31,7 +33,7 @@ yargs.command({
 yargs.command({
   command: "read-all",
   handler: () => {
-    console.log("read-all");
+    const result = readAllTask();
   },
 });
 
