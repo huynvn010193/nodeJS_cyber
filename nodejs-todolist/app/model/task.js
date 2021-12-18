@@ -8,21 +8,28 @@ const readAllTask = () => {
   // chuyển sang kiểu json.
   const taskJson = JSON.parse(taskString);
   return taskJson;
-}
+};
 
 const createTask = (title, description) => {
   const newTask = {
     id: Math.random().toString(),
-    title, 
-    description
+    title,
+    description,
   };
   let taskList = readAllTask();
-  taskList = [...taskList,newTask];
+  taskList = [...taskList, newTask];
   fs.writeFileSync("task.json", JSON.stringify(taskList));
   return newTask;
-}
+};
+
+const readDetailTask = (id) => {
+  let taskList = readAllTask();
+  const task = taskList.find((task) => id === task.id);
+  return task;
+};
 
 module.exports = {
+  readDetailTask,
   readAllTask,
-  createTask
-}
+  createTask,
+};

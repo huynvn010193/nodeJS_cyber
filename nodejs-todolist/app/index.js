@@ -2,7 +2,7 @@
 
 const yargs = require("yargs"); // es5
 const fs = require("fs"); // file system (build in nodeJS);
-const { readAllTask, createTask } = require("./model/task");
+const { readAllTask, createTask, readDetailTask } = require("./model/task");
 
 // tạo lệnh
 yargs.command({
@@ -49,7 +49,12 @@ yargs.command({
   },
   handler: (args) => {
     const { id } = args;
-    console.log("read-detail id", id);
+    const task = readDetailTask(id);
+    if (task) {
+      console.log("task: ", task);
+    } else {
+      console.log("Not found");
+    }
   },
 });
 
