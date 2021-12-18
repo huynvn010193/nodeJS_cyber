@@ -28,7 +28,24 @@ const readDetailTask = (id) => {
   return task;
 };
 
+const updateTask = (id, title, description) => {
+  let taskList = readAllTask();
+  const index = taskList.findIndex((task) => id === task.id);
+  if (index !== -1) {
+    // thực hiện update
+    const oldTask = taskList[index];
+    const newTask = { ...oldTask, title, description };
+    taskList[index] = newTask;
+    fs.writeFileSync("task.json", JSON.stringify(taskList));
+    return newTask;
+  } else {
+    // thông báo cho người dùng bik
+    return false;
+  }
+};
+
 module.exports = {
+  updateTask,
   readDetailTask,
   readAllTask,
   createTask,
