@@ -2,7 +2,7 @@
 
 const yargs = require("yargs"); // es5
 const fs = require("fs"); // file system (build in nodeJS);
-const { readAllTask } = require("./model/task");
+const { readAllTask, createTask } = require("./model/task");
 
 // tạo lệnh
 yargs.command({
@@ -25,7 +25,8 @@ yargs.command({
   },
   handler: (args) => {
     const { title, description } = args;
-    console.log(title, description);
+    const newTask = createTask(title, description);
+    console.log("Đã tạo mới thành công", newTask);
   },
 });
 
@@ -34,6 +35,7 @@ yargs.command({
   command: "read-all",
   handler: () => {
     const result = readAllTask();
+    console.log(result);
   },
 });
 
