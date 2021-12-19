@@ -7,10 +7,9 @@
     "description": "San pham 01"
   },
   {
-    "id": "2",
-    "name": "San pham 02",
-    "price": 4000,
+    "id": "0.033403559851536535",
+    "price": 3000,
     "amount": 1,
-    "description": "San pham 02"
+    "description": "san pham 03"
   }
 ]
