@@ -16,7 +16,7 @@ const {
 yargs.command({
   command: "test",
   handler: () => {
-    console.log("test");
+    console.log("test 123321");
   },
 });
 
