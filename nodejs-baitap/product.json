@@ -3,13 +3,13 @@
     "id": "1",
     "name": "San pham 01",
     "price": 3000,
-    "amount": 1,
+    "amount": 101,
     "description": "San pham 01"
   },
   {
     "id": "0.033403559851536535",
     "price": 3000,
-    "amount": 1,
+    "amount": 51,
     "description": "san pham 03"
   }
 ]

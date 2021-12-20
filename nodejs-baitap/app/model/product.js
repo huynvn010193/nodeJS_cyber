@@ -62,7 +62,23 @@ const deleteProduct = (id) => {
   }
 };
 
+// add 50 amount func
+const addProductAmount = (id) => {
+  let productList = readAllProduct();
+  const index = productList.findIndex((task) => id === task.id);
+  if (index !== -1) {
+    // thực hiện update
+    productList[index].amount += 50;
+    fs.writeFileSync("product.json", JSON.stringify(productList));
+    return productList[index];
+  } else {
+    // thông báo cho người dùng bik
+    return false;
+  }
+}
+
 module.exports = {
+  addProductAmount,
   deleteProduct,
   updateProduct,
   createProduct,

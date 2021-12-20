@@ -3,6 +3,7 @@ const yargs = require("yargs"); // es5
 const fs = require("fs"); // file system (build in nodeJS);
 
 const {
+  addProductAmount,
   deleteProduct,
   readAllProduct,
   readDetailProduct,
@@ -119,6 +120,25 @@ yargs.command({
   handler: (args) => {
     const { id } = args;
     const product = deleteProduct(id);
+    if (product) {
+      console.log("product deleted: ", product);
+    } else {
+      console.log("Not found");
+    }
+  },
+});
+
+// delete - node app/index.js add50Product --id="1"
+yargs.command({
+  command: "add50Product",
+  builder: {
+    id: {
+      type: "string",
+    },
+  },
+  handler: (args) => {
+    const { id } = args;
+    const product = addProductAmount(id);
     if (product) {
       console.log("product deleted: ", product);
     } else {
