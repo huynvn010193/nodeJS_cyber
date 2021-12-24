@@ -35,7 +35,12 @@ const path = require("path");
 const pathPublic = path.join(__dirname, "./public");
 app.use(express.static(pathPublic));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const params = req.query;
+
+  const location = params.address;
+  const weather = await getWeather(location);
+  console.log(weather);
   res.render("weather");
 });
 
