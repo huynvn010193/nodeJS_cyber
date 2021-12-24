@@ -26,4 +26,17 @@ const getWeather = async(location) => {
   }
 };
 
-getWeather("tokyo");
+// getWeather("tokyo");
+
+const express = require('express');
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
+
+const port = 7000;
+
+app.listen(port, () => {
+  console.log("app run on port 7000")
+});
