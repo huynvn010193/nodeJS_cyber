@@ -36,8 +36,11 @@ const pathPublic = path.join(__dirname, "./public");
 app.use(express.static(pathPublic));
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  res.render("weather");
 });
+
+// setup hbs
+app.set("view engine", "hbs");
 
 const port = 7000;
 

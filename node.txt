@@ -1,2 +1,7 @@
 + devDependencies: chỉ hoạt động trong môi trường dev .
 + dependencies: hoạt động cả 3 môi trường dev, staging, production
++ P2_B8
+  views\weather.hbs
+  + Sửa <link rel="stylesheet" href="./css/weather.css"> -> <link rel="stylesheet" href="/css/weather.css">
+  + setup hbs -> app.set("view engine", "hbs");
+  + tạo thư mục views chứa toàn bộ trang web.
