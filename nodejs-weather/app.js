@@ -1,7 +1,7 @@
 const asyncRequest = require("async-request");
 
-const getWeather = async(location) => {
-  const access_key = "c820e73dd2c90cf79724c46989b208da"
+const getWeather = async (location) => {
+  const access_key = "c820e73dd2c90cf79724c46989b208da";
   const url = `http://api.weatherstack.com/current?access_key=${access_key}&query=${location}`;
   try {
     const res = await asyncRequest(url);
@@ -14,22 +14,26 @@ const getWeather = async(location) => {
       wind_speed: data.current.wind_speed,
       precip: data.current.precip,
       cloudcover: data.current.cloudcover,
-    }
-    console.log("res",weather);
+    };
+    console.log("res", weather);
     return weather;
   } catch (err) {
-    console.log("res",err);
+    console.log("res", err);
     return {
       issuccess: false,
-      err
-    }
+      err,
+    };
   }
 };
 
 // getWeather("tokyo");
 
-const express = require('express');
+const express = require("express");
 const app = express();
+const path = require("path");
+
+const pathPublic = path.join(__dirname, "./public");
+app.use(express.static(pathPublic));
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -38,5 +42,5 @@ app.get("/", (req, res) => {
 const port = 7000;
 
 app.listen(port, () => {
-  console.log("app run on port 7000")
+  console.log("app run on port 7000");
 });
