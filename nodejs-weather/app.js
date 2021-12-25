@@ -15,7 +15,6 @@ const getWeather = async (location) => {
       precip: data.current.precip,
       cloudcover: data.current.cloudcover,
     };
-    console.log("res", weather);
     return weather;
   } catch (err) {
     console.log("res", err);
@@ -40,8 +39,22 @@ app.get("/", async (req, res) => {
 
   const location = params.address;
   const weather = await getWeather(location);
-  console.log(weather);
-  res.render("weather");
+  if(location) {
+    res.render("weather",{
+      status: true,
+      region: weather.region,
+      country: weather.country,
+      temperature: weather.temperature,
+      wind_speed: weather.wind_speed,
+      precip: weather.precip,
+      cloudcover: weather.cloudcover,
+    });
+  } else {
+    res.render("weather",{
+      status: false
+    });
+  }
+  
 });
 
 // setup hbs
