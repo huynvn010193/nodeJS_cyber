@@ -7,7 +7,6 @@ const getPosition = async (location) => {
   try {
     const res = await asyncRequest(url);
     const data = JSON.parse(res.body);
-    console.log("data", data);
     return data.features.map((item) => ({
       place_name: item.place_name,
       longitude: item.center[0],
@@ -30,15 +29,25 @@ const path = require("path");
 const pathPublic = path.join(__dirname, "./public");
 app.use(express.static(pathPublic));
 
-const port = 7000;
-
 app.get("/", async (req, res) => {
   const params = req.query;
   const location = params.address;
   const data = await getPosition(location);
-  console.log("data", data);
-  res.send("Hello world");
+  if (location) {
+    res.render("position", {
+      status: true,
+      data: data,
+    });
+  } else {
+    res.render("position", {
+      status: false,
+    });
+  }
 });
+
+app.set("view engine", "hbs");
+
+const port = 7000;
 
 app.listen(port, () => {
   console.log("app run on port 7000");
