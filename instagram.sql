@@ -73,3 +73,13 @@ SET SQL_SAFE_UPDATES = 0;
 
 update users set age = 20
 where age = 19;
+
+-- Xóa người dùng có id = 2
+delete from users
+where id = 2;
+
+delete from users
+where age < 19;
+
+delete from users;
+
