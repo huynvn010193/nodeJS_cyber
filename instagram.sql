@@ -65,4 +65,11 @@ select * from users;
 select last_name as họ, first_name as tên, age as tuoi from users
 where age = 19;
 
+update users set user_type = "admin"
+where id = 2;
 
+-- tắt chế đội an toàn
+SET SQL_SAFE_UPDATES = 0;
+
+update users set age = 20
+where age = 19;
