@@ -83,3 +83,22 @@ where age < 19;
 
 delete from users;
 
+-- Đọc ra comments có id = 2
+select * from comments
+where id = 2;
+
+-- Đọc ra comments dc tạo trước ngày 14/7
+select * from comments
+where create_at > '2020-12-05';
+
+-- update comment_text id = 3
+update comments set comment_text = "Hôm nay trời đẹp quá"
+where id = 3;
+
+-- xoá hết comments trong bảng
+alter table comments
+modify column comment_text varchar(255) null;
+
+update comments 
+set comment_text = null
+WHERE comment_text is not null;
