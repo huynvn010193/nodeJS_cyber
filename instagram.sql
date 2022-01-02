@@ -59,9 +59,6 @@ value ("Hao", "2020-12-05 01:30:59"),
 ("Code cyberSoft thật đỉnh", "2020-07-14 16:02:47"),
 ("No Comment", "2021-01-27 23:59:32");
 
--- Đọc data từ table database
-select * from users;
-
 select last_name as họ, first_name as tên, age as tuoi from users
 where age = 19;
 
@@ -102,3 +99,16 @@ modify column comment_text varchar(255) null;
 update comments 
 set comment_text = null
 WHERE comment_text is not null;
+
+-- Nối chuỗi
+select concat(first_name," ", last_name) as fullname from users;
+
+-- Cắt chuỗi
+-- lấy năm
+select substr(birthday,1,4) as year_of_birth from users;
+select substr(birthday,6,2) as month_of_birth from users;
+select substr(birthday,9,2) as date_of_birth from users;
+
+-- Đọc data từ table database
+select * from users;
+
