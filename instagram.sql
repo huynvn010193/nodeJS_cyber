@@ -37,9 +37,13 @@ modify column last_name varchar(160) not null;
 
 -- thêm data vào table
 insert into users(first_name, last_name, age, birthday)
-value ("Hào", "Nguyễn", 29, "1998-05-11"),
-("Thảo", "Trương", 19, "1999-06-15"),
-("Kha", "Le", 18, "2000-08-20");
+value ("Hào", "Nguyễn", 17, "1998-05-11"),
+("Lâm", "Nguyễn", 15, "1998-05-11"),
+("Tuấn", "Nguyễn", 19, "1998-05-11"),
+("Thảo", "Trương", 23, "1999-06-15"),
+("nhi", "Trương", 32, "1998-05-11"),
+("khoa", "Lê", 18, "1998-05-11"),
+("Kha", "Lê", 21, "2000-08-20");
 
 drop table if exists comments;
 create table comments(
@@ -118,6 +122,25 @@ select reverse(last_name) as last_name_reverse from users;
 
 -- viết hoa
 select upper(first_name), lower(last_name) from users; 
+
+-- Không lấy trùng nhau
+select distinct last_name from users;
+
+-- sắp xếp đội tuổi theo thứ tự tăng dần
+select * from users
+order by age asc;
+
+-- sắp xếp đội tuổi theo thứ tự giảm dần
+select * from users
+order by age desc;
+
+-- sắp xếp tên theo thứ tự aphabel
+select * from users
+order by first_name asc;
+
+select * from users
+order by birthday asc;
+
 
 -- Đọc data từ table database
 select * from users;
