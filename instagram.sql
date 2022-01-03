@@ -109,6 +109,21 @@ select substr(birthday,1,4) as year_of_birth from users;
 select substr(birthday,6,2) as month_of_birth from users;
 select substr(birthday,9,2) as date_of_birth from users;
 
+-- Thay thế chuỗi
+select replace(user_type,"client","khách hàng") as loainguoidung from users;
+select replace(user_type,"admin","quản trị") as loainguoidung from users;
+
+-- đảo ngược
+select reverse(last_name) as last_name_reverse from users;
+
+-- viết hoa
+select upper(first_name), lower(last_name) from users; 
+
 -- Đọc data từ table database
 select * from users;
+
+-- bài tập
+-- Nếu comment dài hơn 8 ký tự thì cắt bỏ các ký tự phía sau và thay thế bằng dấu "..."
+select comment_text, if(length(comment_text) > 8, replace(comment_text,substr(comment_text,9),"..."),comment_text) as chinhsua from comments;
+
 
