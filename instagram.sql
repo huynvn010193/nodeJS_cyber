@@ -141,12 +141,61 @@ order by first_name asc;
 select * from users
 order by birthday asc;
 
+-- lấy ra 2 người dùng đầu tiên
+select * from users
+limit 2;
+
+-- lấy ra 3 người dùng cuối cùng
+select * from users order by id desc limit 3;
 
 -- Đọc data từ table database
 select * from users;
 
+-- tìm kiếm last_name gần giống với chuỗi "ần". dấu % là ký tự gì cũng dc
+select * from users
+where last_name like '%ê%';
+
+-- Các hàm tổng hợp
+-- count
+select count(*) as tong_so_luong_users from users;
+
+-- đếm xem có bao nhiêu người họ nguyễn
+select count(*) as ho_Nguyen from users where last_name = "Nguyễn";
+
+-- đếm xem có bao nhiêu họ khác nhau
+select count(distinct last_name) as ho_differnt from users;
+
+-- Min - Max
+-- tìm ra tuổi lớn nhất và nhỏ nhất
+select min(age) as age_min, max(age) as age_max from users;
+
+-- Tìm ra các user có độ tuổi nhỏ nhất
+select * from users where age = (select min(age) from users);
+
+-- Tìm ra các user có độ tuổi lớn nhất
+select * from users where age = (select max(age) from users);
+
+-- GROUP_BY: giúp thống kê
+-- Lập nhóm người nào có last_name giống nhau
+select last_name, count(*) from users
+group by last_name;
+
+-- Tính tổng tuổi của users
+select last_name, sum(age) from users
+group by last_name;
+
+-- Tính trung bình tuổi của users
+select last_name, avg(age) from users
+group by last_name;
+
 -- bài tập
 -- Nếu comment dài hơn 8 ký tự thì cắt bỏ các ký tự phía sau và thay thế bằng dấu "..."
 select comment_text, if(length(comment_text) > 8, replace(comment_text,substr(comment_text,9),"..."),comment_text) as chinhsua from comments;
+
+-- Yêu cầu: lấy ra 3 comments
+-- sắp xêp theo thời gian comment nào tạo ra trước thì dưới, tạo ra sau để ở trên
+select * from comments order by create_at desc limit 3;
+
+
 
 
