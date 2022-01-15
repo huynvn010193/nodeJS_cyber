@@ -13,8 +13,8 @@ create table customers(
 );
 
 insert into customers(first_name, last_name, email, birthday)
-values ('Hào','Nguyễn','hao@gmail.com','1997-05-11'),
-('Thảo','Trương','thaotruong@gmail.com','1999-11-12'),
+values('Thảo','Trương','thaotruong@gmail.com','1999-11-12'),
+('Hào','Nguyễn','hao@gmail.com','1997-05-11'),
 ('Hường','Lê','huong@gmail.com','1997-05-11');
 
 -- tạo bảng orders -- tạo bảng nhiều (trong mối quan hệ 1 = n)
@@ -36,3 +36,21 @@ values("2021-02-17", 1000, 80, 1),
 -- kỹ thuật cross join
 -- Tìm ra đơn đặt hàng mà khách hàng Hào đã đặt
 select * from orders where customer_id = (select customer_id from customers where first_name = "Hào");
+
+-- kỹ thuật inner join
+-- Cách 1 : Tìm đơn đặt hàng K/H tên Hào
+select * from customers, orders
+where customers.customer_id = orders.customer_id && first_name = "Hào";
+
+-- Cách 2
+select * from customers
+inner join orders
+on customers.customer_id = orders.customer_id
+where first_name = "Hào";
+
+-- BT inner join: lấy ra người dùng nào có đơn đặt hàng lớn hơn hoặc bằng 1000
+select concat(first_name, " ", last_name) as ho_va_ten from customers
+inner join orders
+on customers.customer_id = orders.customer_id
+where price >= 1000;
+
