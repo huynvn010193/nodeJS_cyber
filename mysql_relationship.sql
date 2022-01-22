@@ -54,3 +54,24 @@ inner join orders
 on customers.customer_id = orders.customer_id
 where price >= 1000;
 
+-- left join: bảng nào select ... from:  thì bảng đó nằm bên trái , bảng left join thì là bảng bên tay phải
+-- lấy ra những khách hàng chưa có đơn đặt hàng
+select concat(first_name, " ", last_name) as ho_va_ten from customers
+left join orders
+on customers.customer_id = orders.customer_id
+where orders.customer_id is null;
+
+-- lấy ra những khách hàng có đơn đặt hàng rồi
+select concat(first_name, " ", last_name) as ho_va_ten from customers
+left join orders
+on customers.customer_id = orders.customer_id
+where orders.customer_id is not null;
+
+-- VD 2: Left join : tính tổng số lượng sản phẩm đã mua của khách hàng
+-- Tắt chế độ nghiêm ngặt trên macbook: set global sql_mode = ''
+-- ifnull(sum(amount), 0): nếu mà null thì cho là 0 còn khác null -> sum(amount)
+select *, ifnull(sum(amount), 0) as tong_sp from customers
+left join orders
+on customers.customer_id = orders.customer_id
+group by customers.customer_id
+order by tong_sp desc;
