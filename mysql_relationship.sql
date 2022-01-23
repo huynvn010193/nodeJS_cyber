@@ -33,6 +33,11 @@ values("2021-02-17", 1000, 80, 1),
 ("2021-02-13", 1500, 50, 2),
 ("2021-01-17", 500, 10, 1);
 
+insert into orders(order_date, price, amount)
+values("2021-03-17", 700, 80),
+("2021-02-13", 900, 50),
+("2021-01-17", 1600, 10);
+
 -- kỹ thuật cross join
 -- Tìm ra đơn đặt hàng mà khách hàng Hào đã đặt
 select * from orders where customer_id = (select customer_id from customers where first_name = "Hào");
@@ -70,8 +75,15 @@ where orders.customer_id is not null;
 -- VD 2: Left join : tính tổng số lượng sản phẩm đã mua của khách hàng
 -- Tắt chế độ nghiêm ngặt trên macbook: set global sql_mode = ''
 -- ifnull(sum(amount), 0): nếu mà null thì cho là 0 còn khác null -> sum(amount)
-select *, ifnull(sum(amount), 0) as tong_sp from customers
+select concat(first_name, " ", last_name) as ho_va_ten , ifnull(sum(amount), 0) as tong_sp from customers
 left join orders
 on customers.customer_id = orders.customer_id
 group by customers.customer_id
 order by tong_sp desc;
+
+-- RIGHT JOIN
+-- Tìm khách hàng đã mua sản phẩm vào tháng 2
+select ifnull(concat(first_name, " ", last_name),"miss") as ho_va_ten from customers
+right join orders
+on customers.customer_id = orders.customer_id
+where order_date like "%-02-%"
