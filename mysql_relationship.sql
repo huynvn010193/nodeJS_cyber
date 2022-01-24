@@ -86,4 +86,51 @@ order by tong_sp desc;
 select ifnull(concat(first_name, " ", last_name),"miss") as ho_va_ten from customers
 right join orders
 on customers.customer_id = orders.customer_id
-where order_date like "%-02-%"
+where order_date like "%-02-%";
+
+-- full join: sự kết hợp giữa right join và left join: dùng từ khóa union
+select * from customers
+left join orders
+on customers.customer_id = orders.customer_id
+union
+select * from customers
+right join orders
+on customers.customer_id = orders.customer_id;
+
+-- Mối quan hệ N - N : many - many
+create table laptops (
+	id int primary key auto_increment,
+    name varchar(150) not null,
+    description varchar(1000) not null,
+    price double not null
+);
+
+insert into laptops(name, description, price)
+values("Macbook M1", "laptops xịn nhất hiện nay", 4000),
+("Acer Nitro 5", "laptops gaming đỉnh cao", 1500),
+("Dell Gaming G3", "laptops gaming mỏng nhẹ", 1600);
+
+create table stores (
+	id int primary key auto_increment,
+    name varchar(150) not null,
+    address varchar(250) not null
+);
+
+insert into stores(name, address)
+values("FPT shop", "150 Cao Thắng quận 3 TPHCM"),
+("Điện máy xanh", "203 150 Điện Biên Phủ quận 3 TPHCM"),
+("Thế giới đi động", "10 3/2 quận 10 TPHCM");
+
+
+create table laptops_stores (
+	id int primary key auto_increment,
+    laptop_id int,
+    store_id int,
+    foreign key (laptop_id) references laptops(id),
+    foreign key (store_id) references stores(id)
+);
+
+insert into laptops_stores(laptop_id, store_id) values
+(1 , 1), ( 1, 2),
+(2 , 2), (1 , 3),
+(3 , 1), (3 , 2), (3 , 3);
