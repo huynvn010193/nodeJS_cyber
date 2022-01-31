@@ -121,7 +121,6 @@ values("FPT shop", "150 Cao Thắng quận 3 TPHCM"),
 ("Điện máy xanh", "203 150 Điện Biên Phủ quận 3 TPHCM"),
 ("Thế giới đi động", "10 3/2 quận 10 TPHCM");
 
-
 create table laptops_stores (
 	id int primary key auto_increment,
     laptop_id int,
@@ -134,3 +133,17 @@ insert into laptops_stores(laptop_id, store_id) values
 (1 , 1), ( 1, 2),
 (2 , 2), (1 , 3),
 (3 , 1), (3 , 2), (3 , 3);
+
+
+-- Tìm xem điện máy xanh đang bán những mẫu laptop nào 
+	-- B1: join các table lại với nhau
+	-- B2: Tìm tên điện máy xanh
+    -- B3: Lấy ra tên laptop và giá.
+
+select laptops.name, laptops.price from stores
+inner join laptops_stores
+on stores.id = laptops_stores.store_id
+inner join laptops
+on laptops.id = laptops_stores.laptop_id
+where stores.name = "Điện máy xanh";
+
