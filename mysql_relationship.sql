@@ -147,3 +147,15 @@ inner join laptops
 on laptops.id = laptops_stores.laptop_id
 where stores.name = "Điện máy xanh";
 
+-- Tìm xem macbook M1 đang được bán tại những cửa hàng nào
+-- B1: Join các bảng lại với nhau
+-- B2: Tìm tên sản phẩm laptops.name = macbook M1
+-- B3: Lấy ra tên cửa hàng có bán sản phẩm.
+
+select stores.name from stores
+inner join laptops_stores
+on stores.id = laptops_stores.store_id
+inner join laptops
+on laptops.id = laptops_stores.laptop_id
+where laptops.name like "%Macbook M1%";
+
