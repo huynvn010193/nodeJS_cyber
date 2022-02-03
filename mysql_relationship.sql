@@ -173,4 +173,25 @@ left join stores
 on stores.id = laptops_stores.store_id
 where stores.id is null;
 
+-- Right Join - many to many
+-- Tìm xem Macbook M1 có được bán tại thế giới di động hay không ?
+-- Các bước thực hiện:
+-- B1: Join các table lại với nhau
+-- B2: Setup điều kiện
+-- B3: Lấy ra tên
+
+select * from laptops
+right join laptops_stores
+on laptops.id = laptops_stores.laptop_id
+right join stores
+on stores.id = laptops_stores.store_id
+where laptops.name = "Macbook M1" and stores.name = "Thế giới di động"
+
+
+
+
+
+
+
+
 
