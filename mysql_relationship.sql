@@ -187,11 +187,3 @@ right join stores
 on stores.id = laptops_stores.store_id
 where laptops.name = "Macbook M1" and stores.name = "Thế giới di động"
 
-
-
-
-
-
-
-
-
