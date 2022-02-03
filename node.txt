@@ -5,3 +5,13 @@
   + Sửa <link rel="stylesheet" href="./css/weather.css"> -> <link rel="stylesheet" href="/css/weather.css">
   + setup hbs -> app.set("view engine", "hbs");
   + tạo thư mục views chứa toàn bộ trang web.
+
++ Phân tích dự án instagram
+- table
+	+ users
+	+ photos 
+	+ comments
+	+ tags
+	+ photo_tag
+	+ follows
+	+ likes
