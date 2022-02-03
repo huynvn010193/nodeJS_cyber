@@ -108,7 +108,8 @@ create table laptops (
 insert into laptops(name, description, price)
 values("Macbook M1", "laptops xịn nhất hiện nay", 4000),
 ("Acer Nitro 5", "laptops gaming đỉnh cao", 1500),
-("Dell Gaming G3", "laptops gaming mỏng nhẹ", 1600);
+("Dell Gaming G3", "laptops gaming mỏng nhẹ", 1600),
+("Razer Blade 15", "laptops đồ hoạ đỉnh cao", 5000);
 
 create table stores (
 	id int primary key auto_increment,
@@ -158,4 +159,18 @@ on stores.id = laptops_stores.store_id
 inner join laptops
 on laptops.id = laptops_stores.laptop_id
 where laptops.name like "%Macbook M1%";
+
+-- Left Join - many to many
+-- Tìm xem các laptop chưa dc bán ở bất kỳ cửa hàng nào cả
+-- B1 : Join các table lại với nhau
+-- B2: Tìm xem laptops nào chưa dc bán
+-- B3: Lấy tên và giá
+
+select laptops.name, laptops.price  from laptops
+left join laptops_stores
+on laptops.id = laptops_stores.laptop_id
+left join stores
+on stores.id = laptops_stores.store_id
+where stores.id is null;
+
 
