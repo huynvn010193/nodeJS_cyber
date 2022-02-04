@@ -6,6 +6,8 @@
   + setup hbs -> app.set("view engine", "hbs");
   + tạo thư mục views chứa toàn bộ trang web.
 
+-- Tắt chế độ nghiêm ngặt trên macbook: set global sql_mode = ''
+
 + Phân tích dự án instagram
 - table
 	+ users
