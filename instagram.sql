@@ -196,6 +196,8 @@ select comment_text, if(length(comment_text) > 8, replace(comment_text,substr(co
 -- sắp xêp theo thời gian comment nào tạo ra trước thì dưới, tạo ra sau để ở trên
 select * from comments order by create_at desc limit 3;
 
+-- 
+
 
 
 
