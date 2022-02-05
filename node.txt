@@ -17,3 +17,5 @@
 	+ photo_tag
 	+ follows
 	+ likes
+
+Vào postman -> collection -> new collection : đặt tên student-management-cyberlear
