@@ -11,6 +11,13 @@ app.get('/students', (req, res) => {
   res.send('Lấy danh sách học sinh');
 });
 
+// lấy thông tin chi tiết học sinh
+app.get('/students/:id', (req, res) => {
+  const params = req.params;
+  const id = params.id;
+  res.send('lấy thông tin chi tiết của học sinh có id là: ' +id);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
