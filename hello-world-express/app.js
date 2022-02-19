@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const studentList = [
+let studentList = [
   {
     id: 1, 
     fullName : "Nguyễn Phong Hào",
@@ -39,28 +39,50 @@ app.get('/students', (req, res) => {
 app.get('/students/:id', (req, res) => {
   const params = req.params;
   const id = params.id;
-  res.send('lấy thông tin chi tiết của học sinh có id là: ' +id);
+
+  const index = studentList.findIndex((student) => {
+    return student.id == id;
+  });
+
+  if(index !== -1) {
+    const student = studentList[index];
+    res.status(200).send(student);
+  } else {
+    res.status(404).send("Not found");
+  }
 });
 
 // thêm danh sách học sinh
 app.post("/students", (req, res) => {
-  const student = req.body;
-  console.log(req.body);
-  res.send('thêm học sinh');
+  let student = req.body;
+  // Tạo id không dc trùng
+  student = {id: Math.random(),...student};
+  studentList = [...studentList, student];
+  res.status(201).send(student);
 });
 
 // Cập nhật học sinh
 app.put("/students/:id", (req, res) => {
   const { id } = req.params;
-  const student = req.body;
-  console.log("id-student",id, student);
-  res.send('cập nhật học sinh');
+  const {fullName, age, numberClass} = req.body;
+  const index = studentList.findIndex((student) => student.id == id);
+  if(index !== -1) {
+    const oldStudent = studentList[index];
+    const updatedStudent = {...oldStudent, fullName, age, numberClass };
+    studentList[index] = updatedStudent;
+    res.status(200).send(updatedStudent);
+  } else {
+    res.status(404).send("Not Found");
+  }
+  
 });
 
 // Xoá học sinh 
 app.delete("/students/:id", (req, res) => {
   const { id } = req.params;
-  res.send('delete học sinh có id: ' + id);
+  
+
+  res.status(200).send(updatedStudent);
 });
 
 app.listen(port, () => {
