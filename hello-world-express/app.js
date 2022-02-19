@@ -80,9 +80,14 @@ app.put("/students/:id", (req, res) => {
 // Xoá học sinh 
 app.delete("/students/:id", (req, res) => {
   const { id } = req.params;
-  
-
-  res.status(200).send(updatedStudent);
+  const index = studentList.findIndex((student) => student.id == id);
+  if(index !== -1) {
+    const student = studentList[index];
+    studentList.splice(index,1);
+    res.status(200).send(studentList);
+  } else {
+    res.status(404).send("Not found");
+  }
 });
 
 app.listen(port, () => {
