@@ -19,3 +19,8 @@
 	+ likes
 
 Vào postman -> collection -> new collection : đặt tên student-management-cyberlear
+
++ Vấn đề server, database -> models giải quyết
++ Vấn đề về xử lý, luồng code -> controller gỉai quyết
++ Vấn đề về View -> View giải quyết
++ Vấn để https request -> Routers giải quyết
