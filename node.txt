@@ -24,3 +24,6 @@ Vào postman -> collection -> new collection : đặt tên student-management-cy
 + Vấn đề về xử lý, luồng code -> controller gỉai quyết
 + Vấn đề về View -> View giải quyết
 + Vấn để https request -> Routers giải quyết
+
++ Services: thực chất là functions giúp chúng ta xử lý về mặt dữ liệu
++ Services: thường chịu trách nhiệm tương tác database để truy suất dữ liệu.
