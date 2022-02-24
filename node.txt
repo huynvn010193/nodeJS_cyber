@@ -27,3 +27,7 @@ Vào postman -> collection -> new collection : đặt tên student-management-cy
 
 + Services: thực chất là functions giúp chúng ta xử lý về mặt dữ liệu
 + Services: thường chịu trách nhiệm tương tác database để truy suất dữ liệu.
+
+Middleware: là một đoạn code nằm giữa Request và Response
+Middleware bản chất là 1 function tương tự như controller nhưng có thêm tham số next() bên trong
+Middleware nếu next() được gọi sẽ xử lý tiếp function phía sau.

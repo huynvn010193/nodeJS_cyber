@@ -1,5 +1,6 @@
 const express = require("express");
 const studentRouter = express.Router();
+const { logFeature } = require("../middlewares/logger/log-feature");
 const {
   getStudentList,
   getStudentDetailById,
@@ -9,7 +10,7 @@ const {
 } = require("../controllers/student.controllers");
 
 // Lấy danh sách học sinh (url: http://localhost:3000/students)
-studentRouter.get("/", getStudentList);
+studentRouter.get("/", logFeature, getStudentList);
 
 // lấy thông tin chi tiết học sinh
 studentRouter.get("/:id", getStudentDetailById);
