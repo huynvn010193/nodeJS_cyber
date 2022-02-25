@@ -2,6 +2,10 @@ const express = require("express");
 const studentRouter = express.Router();
 const { logFeature } = require("../middlewares/logger/log-feature");
 const {
+  checkEmpty,
+  checkNumberClass,
+} = require("../middlewares/validations/student.validations");
+const {
   getStudentList,
   getStudentDetailById,
   createStudent,
@@ -16,7 +20,7 @@ studentRouter.get("/", logFeature, getStudentList);
 studentRouter.get("/:id", getStudentDetailById);
 
 // thêm danh sách học sinh
-studentRouter.post("/", createStudent);
+studentRouter.post("/", checkEmpty, checkNumberClass, createStudent);
 
 // Cập nhật học sinh
 studentRouter.put("/:id", updateStudentById);
