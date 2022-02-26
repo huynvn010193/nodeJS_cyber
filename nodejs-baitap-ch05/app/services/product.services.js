@@ -47,7 +47,7 @@ const createProduct = (product) => {
 }
 
 const updateProduct = (id,product) => {
-  const index = productList.findIndex((product) => id === product.id);
+  const index = productList.findIndex((product) => id == product.id);
   if(index !== -1) {
     const oldProduct = productList[index];
     const producted = {...oldProduct,...product};
@@ -59,7 +59,7 @@ const updateProduct = (id,product) => {
 }
 
 const deleteProduct = (id) => {
-  const index = productList.findIndex((product) => id === product.id);
+  const index = productList.findIndex((product) => id == product.id);
   if(index !== -1) {
     const product = productList[index];
     productList.splice(index,1);

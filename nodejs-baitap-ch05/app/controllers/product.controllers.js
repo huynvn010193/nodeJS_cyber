@@ -28,6 +28,7 @@ const createProductNew = (req, res) => {
 };
 
 const updateProductById = (req,res) => {
+  console.log("updateProductById");
   const { id } = req.params;
   const product = req.body;
 
@@ -44,8 +45,8 @@ const deleteProductById = (req,res) => {
   const { id } = req.params;
   const product = deleteProduct(id);
 
-  if (student) {
-    res.status(200).send(student);
+  if (product) {
+    res.status(200).send(product);
   } else {
     res.status(404).send("Not found");
   }
