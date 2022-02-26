@@ -36,3 +36,5 @@ sequelize: Giúp ta kết nối và viết SQL trong nodeJS.
 mySQL2 giúp ta chuyển đổi các câu lệnh NodeJS sang MySQL.
 
 password-mysql: admin23!%
+
+Model trong sequelize: tương đương với bảng trong database
