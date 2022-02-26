@@ -31,3 +31,8 @@ Vào postman -> collection -> new collection : đặt tên student-management-cy
 Middleware: là một đoạn code nằm giữa Request và Response
 Middleware bản chất là 1 function tương tự như controller nhưng có thêm tham số next() bên trong
 Middleware nếu next() được gọi sẽ xử lý tiếp function phía sau.
+
+sequelize: Giúp ta kết nối và viết SQL trong nodeJS.
+mySQL2 giúp ta chuyển đổi các câu lệnh NodeJS sang MySQL.
+
+password-mysql: admin23!%
