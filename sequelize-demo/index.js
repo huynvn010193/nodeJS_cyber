@@ -32,6 +32,13 @@ const createTask = async (name, status) => {
 
 createTask("Học JS", "Pending");
 
+const getAllTask = async () => {
+  const taskList = await Task.findAll();
+  console.log(JSON.stringify(taskList, null, 2));
+};
+
+getAllTask();
+
 // Đồng bộ model
 const syncModel = async () => {
   // force: true nghĩa là model thay đổi thì bảng đó bị xoá đi tạo ra bảng mới.
