@@ -37,7 +37,18 @@ const getAllTask = async () => {
   console.log(JSON.stringify(taskList, null, 2));
 };
 
-getAllTask();
+// getAllTask();
+
+const getTaskById = async (id) => {
+  const task = await Task.findOne({
+    where: {
+      id,
+    },
+  });
+  console.log("task: ", JSON.stringify(task, null, 2));
+};
+
+getTaskById(3);
 
 // Đồng bộ model
 const syncModel = async () => {
