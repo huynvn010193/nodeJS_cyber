@@ -19,7 +19,7 @@ const createStudentModel = (sequelize) => {
     },
     {
       tableName: "students",
-      timestamps: false,
+      //timestamps: false,
     }
   );
 };

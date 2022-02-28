@@ -1,3 +1,5 @@
+const { Student } = require("../model");
+
 let studentList = [
   {
     id: 1,
@@ -40,10 +42,8 @@ const getDetail = (id) => {
   }
 };
 
-const create = (student) => {
-  // Tạo id không dc trùng
-  const newStudent = { id: Math.random(), ...student };
-  studentList = [...studentList, newStudent];
+const create = async (student) => {
+  const newStudent = await Student.create(student);
   return newStudent;
 };
 

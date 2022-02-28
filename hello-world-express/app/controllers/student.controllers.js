@@ -28,10 +28,10 @@ const getStudentDetailById = (req, res) => {
   }
 };
 
-const createStudent = (req, res) => {
+const createStudent = async (req, res) => {
   let student = req.body;
 
-  const newStudent = create(student);
+  const newStudent = await create(student);
   res.status(201).send(newStudent);
 };
 
