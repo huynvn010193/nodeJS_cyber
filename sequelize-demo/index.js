@@ -30,7 +30,7 @@ const createTask = async (name, status) => {
   });
 };
 
-createTask("Học JS", "Pending");
+// createTask("Học JS", "Pending");
 
 const getAllTask = async () => {
   const taskList = await Task.findAll();
@@ -49,6 +49,30 @@ const getTaskById = async (id) => {
 };
 
 getTaskById(3);
+
+const upadteTaskById = async (data,id) => {
+  await Task.update(data, {
+    where: {
+      id
+    },
+  })
+}
+
+// upadteTaskById({
+//   name: "Học Lập Trình 5_2",
+//   status: "OPEN",
+// },5);
+
+const deleteByID = async (id) => {
+  await Task.destroy({
+    where: {
+      id
+    }
+  })
+}
+
+// deleteByID(16);
+
 
 // Đồng bộ model
 const syncModel = async () => {
