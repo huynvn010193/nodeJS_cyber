@@ -21,7 +21,8 @@ let studentList = [
   },
 ];
 
-const getList = () => {
+const getList = async () => {
+  const studentList = await Student.findAll();
   if (studentList) {
     return studentList;
   } else {
@@ -29,13 +30,18 @@ const getList = () => {
   }
 };
 
-const getDetail = (id) => {
-  const index = studentList.findIndex((student) => {
-    return student.id == id;
+const getDetail = async (id) => {
+  // const index = studentList.findIndex((student) => {
+  //   return student.id == id;
+  // });
+
+  const student = await Student.findOne({
+    where: {
+      id,
+    },
   });
 
-  if (index !== -1) {
-    const student = studentList[index];
+  if (student) {
     return student;
   } else {
     return false;
@@ -47,24 +53,29 @@ const create = async (student) => {
   return newStudent;
 };
 
-const update = (id, student) => {
-  const index = studentList.findIndex((student) => student.id == id);
-  if (index !== -1) {
-    const oldStudent = studentList[index];
-    const studentUpdated = { ...oldStudent, ...student };
-    studentList[index] = studentUpdated;
+const update = async (id, student) => {
+  // const index = studentList.findIndex((student) => student.id == id);
+  const studentUpdate = await getDetail(id);
+  if (studentUpdate) {
+    studentUpdate.fullName = student.fullName;
+    studentUpdate.age = student.age;
+    studentUpdate.numberClass = student.numberClass;
+    const studentUpdated = await studentUpdate.save();
     return studentUpdated;
   } else {
     return false;
   }
 };
 
-const deleteById = (id) => {
-  const index = studentList.findIndex((student) => student.id == id);
-  if (index !== -1) {
-    const student = studentList[index];
-    studentList.splice(index, 1);
-    return student;
+const deleteById = async (id) => {
+  const studentDelete = await getDetail(id);
+  if (studentDelete) {
+    await Student.destroy({
+      where: {
+        id,
+      },
+    });
+    return studentDelete;
   } else {
     return false;
   }
