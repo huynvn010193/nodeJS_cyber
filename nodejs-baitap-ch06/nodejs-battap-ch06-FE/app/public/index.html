@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../public/css/index.css" />
+  </head>
+  <body>
+    <main class="bg-dark">
+      <div class="container product-managerment bg-base">
+        <h2 class="title-cyber">
+          <span class="cyber--title">Thêm</span
+          ><span class="product--title">Sản phẩm</span>
+        </h2>
+        <div class="product-managerment__content">
+          <div class="mb-4 text-right">
+            <button
+              id="btnPopupModalAdd"
+              class="btn btn-lg btn-outline-warning"
+              data-toggle="modal"
+              data-target="#productModal"
+            >
+              Thêm Sản Phẩm
+            </button>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="productModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="productModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      id="title-model"
+                      class="modal-title"
+                      id="exampleModalLabel"
+                    >
+                      Thêm Sản phẩm
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text min-width" id="hoVaTen"
+                            >Tên sản phẩm</span
+                          >
+                        </div>
+                        <input
+                          id="name"
+                          type="text"
+                          class="form-control"
+                          placeholder="Tên sản phẩm ..."
+                          aria-label="HoVaTen"
+                          aria-describedby="hoVaTen"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text min-width" id="tuoi"
+                            >Giá</span
+                          >
+                        </div>
+                        <input
+                          id="price"
+                          type="number"
+                          class="form-control"
+                          placeholder="Giá ... "
+                          aria-label="Giá"
+                          aria-describedby="tuoi"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text min-width" id="tuoi"
+                            >Số lượng</span
+                          >
+                        </div>
+                        <input
+                          id="amount"
+                          type="number"
+                          class="form-control"
+                          placeholder="Số lượng ... "
+                          aria-label="Số lượng"
+                          aria-describedby="tuoi"
+                        />
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text min-width" id="tuoi"
+                            >Giảm giá</span
+                          >
+                        </div>
+                        <input
+                          id="sale"
+                          type="text"
+                          class="form-control"
+                          placeholder="Giảm giá ... "
+                          aria-label="Giảm giá"
+                          aria-describedby="tuoi"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Đóng
+                    </button>
+                    <button
+                      id="addProduct"
+                      type="button"
+                      class="btn btn-outline-warning"
+                    >
+                      Thêm
+                    </button>
+                    <button
+                      id="updateProduct"
+                      type="button"
+                      class="btn btn-outline-warning"
+                    >
+                      Cập Nhật
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-list">
+            <table class="table">
+              <thead class="color__white header__size">
+                <tr>
+                  <th scope="col">Mã số</th>
+                  <th scope="col">Tên sản phẩm</th>
+                  <th scope="col">Giá</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Giảm giá</th>
+                </tr>
+              </thead>
+              <tbody id="tbody" class="color__white body__size"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Messages -->
+    <div
+      class="modal fade"
+      id="modalMessage"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalMessageLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <p class="alert alert-primary" id="message-content">
+          Thành Công
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../src/index.js" type="module"></script>
+  </body>
+</html>

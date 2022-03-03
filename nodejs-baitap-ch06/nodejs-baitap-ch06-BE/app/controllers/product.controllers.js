@@ -1,61 +1,66 @@
-const { getList, getDetail, createProduct, updateProduct, deleteProduct } = require("../services/product.services");
+const {
+  getList,
+  getDetail,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} = require("../services/product.services");
 
-const getProductlist = (req,res) => {
-  const productList = getList();
-  if(productList) {
+const getProductlist = async (req, res) => {
+  const productList = await getList();
+  if (productList) {
     res.status(200).send(productList);
   } else {
     res.status(404).send("Not Found");
   }
-}
+};
 
-const getProductDetailById = (req,res) => {
+const getProductDetailById = async (req, res) => {
   const params = req.params;
   const id = params.id;
-  const product = getDetail(id);
+  const product = await getDetail(id);
   if (product) {
     res.status(200).send(product);
   } else {
     res.status(404).send("Not found");
   }
-}
+};
 
-const createProductNew = (req, res) => {
+const createProductNew = async (req, res) => {
   let product = req.body;
 
-  const newProduct = createProduct(product);
+  const newProduct = await createProduct(product);
   res.status(201).send(newProduct);
 };
 
-const updateProductById = (req,res) => {
-  console.log("updateProductById");
+const updateProductById = async (req, res) => {
   const { id } = req.params;
   const product = req.body;
 
-  const productUpdated = updateProduct(id, product);
+  const productUpdated = await updateProduct(id, product);
 
   if (productUpdated) {
     res.status(200).send(productUpdated);
   } else {
     res.status(404).send("Not found");
   }
-}
+};
 
-const deleteProductById = (req,res) => {
+const deleteProductById = async (req, res) => {
   const { id } = req.params;
-  const product = deleteProduct(id);
+  const product = await deleteProduct(id);
 
   if (product) {
     res.status(200).send(product);
   } else {
     res.status(404).send("Not found");
   }
-}
+};
 
 module.exports = {
   getProductlist,
   getProductDetailById,
   createProductNew,
   updateProductById,
-  deleteProductById
-}
+  deleteProductById,
+};
