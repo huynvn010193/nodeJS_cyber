@@ -40,3 +40,12 @@ password-mysql: admin23!%
 Model trong sequelize: tương đương với bảng trong database
 
 https://sequelize.org/master/manual/model-basics.html#column-options
+
+// tạo bảng
+yarn sequelize-cli model:generate --name Station --attributes name:string,address:string,provinces:string
+
+// migrate
+yarn sequelize-cli db:migrate
+
+// undo
+yarn sequelize-cli db:migrate:undo
