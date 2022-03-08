@@ -20,13 +20,19 @@ if (config.use_env_variable) {
   );
 }
 
+// Mỗi lần tạo model -> tự động export model ra lun
+// Đọc toàn bộ file trong thư mục model, sau khi đọc xong tập hợp các file thành cái mảng tên các file
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
+      // điều kiện tên file phải có dấu ".", basename phải khác thư mục này , cắt 3 ký tự cuối của file phải là ".js" -> thì mới cho trả về
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     );
   })
   .forEach((file) => {
+    // nối 2 đường dẩn: 1
+    // __direname: đường dẫn ngay tới index
+    // file: tên file vd: .station -> đi đến station
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes
