@@ -10,6 +10,31 @@ const createStation = async (req, res) => {
   }
 };
 
+const getAllStation = async (req, res) => {
+  try {
+    const stationList = await Station.findAll();
+    res.status(200).send(stationList);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+const getDetailStation = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const detailStation = await Station.findOne({
+      where: {
+        id
+      }
+    });
+    res.status(200).send(detailStation);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 module.exports = {
   createStation,
+  getAllStation,
+  getDetailStation
 };
