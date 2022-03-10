@@ -17,24 +17,44 @@ const getAllStation = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-}
+};
 
 const getDetailStation = async (req, res) => {
   const { id } = req.params;
   try {
     const detailStation = await Station.findOne({
       where: {
-        id
-      }
+        id,
+      },
     });
     res.status(200).send(detailStation);
   } catch (error) {
     res.status(500).send(error);
   }
-}
+};
+
+const updateStation = async (req, res) => {
+  const { id } = req.params;
+  const { name, address, provinces } = req.body;
+  try {
+    const detailStation = await Station.findOne({
+      where: {
+        id,
+      },
+    });
+    detailStation.name = name;
+    detailStation.address = address;
+    detailStation.provinces = provinces;
+    await detailStation.save();
+    res.status(200).send(detailStation);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
 module.exports = {
   createStation,
   getAllStation,
-  getDetailStation
+  getDetailStation,
+  updateStation,
 };
