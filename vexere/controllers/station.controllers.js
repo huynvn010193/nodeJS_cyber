@@ -52,9 +52,24 @@ const updateStation = async (req, res) => {
   }
 };
 
+const deleteStation = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Station.destroy({
+      where: {
+        id,
+      },
+    });
+    res.status(200).send("Xóa thành công");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   createStation,
   getAllStation,
   getDetailStation,
   updateStation,
+  deleteStation,
 };
