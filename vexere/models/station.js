@@ -16,9 +16,32 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: true,
+          len : [3, 30],
+        }
       },
-      address: DataTypes.STRING,
-      provinces: DataTypes.STRING,
+      address: {
+        type: DataTypes.STRING,
+        validate: {
+          // custom lại validator.
+          checkLength(value){
+            if(value.length > 5 && value.length <= 20) {
+              return true;
+            } else {
+              throw new Error('Độ dài phải từ 5 đến 20 ký tự');
+            }
+          }
+        }
+      },
+      provinces: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          // bắt buộc phải điền đúng tên
+          isIn: [['HCM','DN', 'CT', 'HP', 'HN']],
+        }
+      },
     },
     {
       sequelize,
