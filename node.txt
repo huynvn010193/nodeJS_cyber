@@ -49,3 +49,15 @@ yarn sequelize-cli db:migrate
 
 // undo
 yarn sequelize-cli db:migrate:undo
+
+// seeder:
+Chịu trách nhiệm backup lại dữ liệu.
+
+create: yarn sequelize-cli seed:generate --name create-station-fake
+
+yarn sequelize-cli db:seed:all
+
+yarn sequelize-cli db:seed:undo:all
+
+yarn sequelize-cli db:seed:undo --seed 20220313042113-create-station-fake.js
+
