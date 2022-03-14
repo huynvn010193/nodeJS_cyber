@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return await queryInterface.bulkInsert('stations', 
+    return await queryInterface.bulkInsert('stations',
     [
       {
         name: 'Bến xe miền tây',
