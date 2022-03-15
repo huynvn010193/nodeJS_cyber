@@ -22,6 +22,29 @@ const register = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  // B1: tìm ra user đang đăng nhập dựa trên email
+
+  const user = await User.findOne({
+    where: {
+      email,
+    },
+  });
+  // B2: kiểm tra mật khẩu có đúng hay không
+  if (user) {
+    const isAuth = bcrypt.compareSync(password, user.password);
+    if (isAuth) {
+      res.status(200).send({ message: "Đăng nhập thành công!" });
+    } else {
+      res.status(500).send({ message: "Đăng nhập thất bại!" });
+    }
+  } else {
+    res.status(404).send({ message: "Không tìm thấy email phù hợp!" });
+  }
+};
+
 module.exports = {
   register,
+  login,
 };
