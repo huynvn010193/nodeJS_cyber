@@ -9,10 +9,11 @@ const {
 } = require("../controllers/station.controllers");
 const { checkExist } = require("../middlewares/validations/checkExist");
 const { authenticate } = require("../middlewares/auth/authenticate");
+const { authorize } = require("../middlewares/auth/authorize");
 
 const stationRouter = express.Router();
 
-stationRouter.post("/", authenticate, createStation);
+stationRouter.post("/", authenticate, authorize(["ADMIN", "SUPPER_ADMIN"]), createStation);
 stationRouter.get("/", getAllStation);
 stationRouter.get("/:id", getDetailStation);
 stationRouter.put("/:id", checkExist(Station), updateStation);
