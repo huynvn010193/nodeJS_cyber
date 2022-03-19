@@ -51,12 +51,15 @@ const login = async (req, res) => {
 };
 
 const uploadAvartar = async(req, res) => {
-  const { user } = req;
+  const { user, file } = req;
+  const urlImage = `http://localhost:3000/${file.path}`;
   const userFound = await User.findOne({
     email: user.email,
-  })
+  });
+  userFound.avatar = urlImage;
+  await userFound.save();
   res.send(userFound);
-}
+};
 
 module.exports = {
   register,

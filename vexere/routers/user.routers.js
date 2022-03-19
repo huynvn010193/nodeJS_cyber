@@ -10,7 +10,7 @@ userRouter.post("/register", register);
 userRouter.post("/login", login);
 
 
-userRouter.post("/upload-avatar", authenticate, uploadImage(), uploadAvartar);
+userRouter.post("/upload-avatar", authenticate, uploadImage('user'), uploadAvartar);
 
 module.exports = {
   userRouter,
