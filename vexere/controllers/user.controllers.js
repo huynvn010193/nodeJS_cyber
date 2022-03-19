@@ -50,7 +50,16 @@ const login = async (req, res) => {
   }
 };
 
+const uploadAvartar = async(req, res) => {
+  const { user } = req;
+  const userFound = await User.findOne({
+    email: user.email,
+  })
+  res.send(userFound);
+}
+
 module.exports = {
   register,
   login,
+  uploadAvartar,
 };

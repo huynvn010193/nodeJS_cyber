@@ -17,7 +17,7 @@ stationRouter.post("/", authenticate, authorize(["ADMIN", "SUPPER_ADMIN"]), crea
 stationRouter.get("/", getAllStation);
 stationRouter.get("/:id", getDetailStation);
 stationRouter.put("/:id", checkExist(Station), updateStation);
-stationRouter.delete("/:id",authenticate, checkExist(Station), deleteStation);
+stationRouter.delete("/:id", authenticate, checkExist(Station), deleteStation);
 
 module.exports = {
   stationRouter,

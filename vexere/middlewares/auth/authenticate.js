@@ -10,7 +10,7 @@ const authenticate = (req, res, next) => {
       res.status(401).send("Bạn chưa đăng nhập xác thực người dùng")
     }
   } catch (error) {
-    res.status(500).send(error)
+    res.status(401).send("Bạn Chưa Đăng Nhập");
   }
 };
 
