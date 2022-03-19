@@ -1,10 +1,14 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const gravatarUrl = require("gravatar-url");
 
 const register = async (req, res) => {
   const { name, email, password, numberPhone } = req.body;
   try {
+    // tạo avatar mặc định
+    const avatarUrl = gravatarUrl(email);
+
     // tạo ra 1 chuỗi ngẩu nhiên
     // genSaltSync : tạo đồng bộ -> tạo xong mới chạy tiếp
     const salt = bcrypt.genSaltSync(10);
@@ -16,6 +20,7 @@ const register = async (req, res) => {
       email,
       password: hashPassword,
       numberPhone,
+      avatar: avatarUrl,
     });
     res.status(201).send(newUser);
   } catch (error) {
@@ -50,7 +55,7 @@ const login = async (req, res) => {
   }
 };
 
-const uploadAvartar = async(req, res) => {
+const uploadAvartar = async (req, res) => {
   const { user, file } = req;
   const urlImage = `http://localhost:3000/${file.path}`;
   const userFound = await User.findOne({

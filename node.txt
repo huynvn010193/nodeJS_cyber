@@ -77,6 +77,8 @@ const upload = multer({ dest: "./uploads/avatars"})
 -- Cài đặt thư viện : tạo đường dẫn trước.
 mkdirp: https://www.npmjs.com/package/mkdirp
 
+-- cài dặt thư viện : https://www.npmjs.com/package/gravatar-url
+
 
 
 
