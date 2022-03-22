@@ -79,7 +79,13 @@ mkdirp: https://www.npmjs.com/package/mkdirp
 
 -- cài dặt thư viện : https://www.npmjs.com/package/gravatar-url
 
--- 
+-- cài đặt express-fingerprint. and cros:(yarn add cros) 
+const cors = require("cors");
+app.use(cors());
+
+-- Phân tích: mối quan hệ giữa user và trips : -> n - n. khi tạo 1 mối quan hệ n - n thì sẽ có 1 bảng trung gian:
+ticket
+
 
 
 
