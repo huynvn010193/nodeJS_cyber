@@ -27,7 +27,33 @@ const getAllTrip = async (req, res) => {
   res.status(200).send(tripList);
 };
 
+const deleteTrip = async (req, res) => {
+  const { id } = req.params;
+  await Trips.destroy({
+    where: {
+      id,
+    },
+  });
+  res.send(`Đã xóa trip có id là ${id}`);
+};
+
+const updateTrip = async (req, res) => {
+  const { id } = req.params;
+  const { fromStation, toStation, startTime, price } = req.body;
+  const tripUpdate = await Trips.update(
+    { fromStation, toStation, startTime, price },
+    {
+      where: {
+        id,
+      },
+    }
+  );
+  res.status(200).send(`Đã cập nhật trip có id là ${id}`);
+};
+
 module.exports = {
   createTrip,
   getAllTrip,
+  deleteTrip,
+  updateTrip,
 };
