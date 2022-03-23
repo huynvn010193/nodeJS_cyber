@@ -62,12 +62,12 @@ yarn sequelize-cli db:seed:undo:all
 yarn sequelize-cli db:seed:undo --seed 20220313042113-create-station-fake.js
 
 
-== Các câu lệnh khởi tạo project: 
+== Các câu lệnh khởi tạo project:
 1. yarn init
 2. yarn add express mysql2 sequelize
 3. yarn add sequelize cli --dev
 4. cài đặt sequelize: sequelize init
-5. tạo file server.js -> khởi tạo server của express 
+5. tạo file server.js -> khởi tạo server của express
 
 ----
 Thự viện upload file: multer npm : https://www.npmjs.com/package/multer
@@ -87,6 +87,8 @@ app.use(cors());
 ticket
 
 SET GLOBAL FOREIGN_KEY_CHECKS = 0;
+
+--- Lấy tất cả chuyến đi:
 
 
 
