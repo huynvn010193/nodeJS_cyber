@@ -86,6 +86,9 @@ app.use(cors());
 -- Phân tích: mối quan hệ giữa user và trips : -> n - n. khi tạo 1 mối quan hệ n - n thì sẽ có 1 bảng trung gian:
 ticket
 
+SET GLOBAL FOREIGN_KEY_CHECKS = 0;
+
+
 
 
 

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,24 +10,42 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
-    return await queryInterface.bulkInsert('stations',
-    [
-      {
-        name: 'Bến xe miền tây',
-        address: "395 Kinh Dương Vương, An Lạc, Bình Tân, Thành phố Hồ Chí Minh",
-        provinces: "HCM",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: 'Bến xe đà nẵng',
-        address: "Tôn Đức Thắng, Hoà Minh, Liên Chiểu, Đà Nẵng 550000",
-        provinces: "DN",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-    ], {});
+     */
+    return await queryInterface.bulkInsert(
+      "stations",
+      [
+        {
+          name: "Bến xe miền tây",
+          address:
+            "395 Kinh Dương Vương, An Lạc, Bình Tân, Thành phố Hồ Chí Minh",
+          provinces: "HCM",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Bến xe đà nẵng",
+          address: "Tôn Đức Thắng, Hoà Minh, Liên Chiểu, Đà Nẵng 550000",
+          provinces: "DN",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Bến xe miền đông",
+          address: "292 Đinh Bộ Lĩnh, phường 26",
+          provinces: "HCM",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Bến xe An Sương",
+          address: "QL22, Bà Điểm, Hóc Môn, Thành phố Hồ Chí Minh",
+          provinces: "HCM",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -37,6 +55,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return await queryInterface.bulkDelete('stations', null, {});
-  }
+    return await queryInterface.bulkDelete("stations", null, {});
+  },
 };
