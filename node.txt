@@ -90,12 +90,7 @@ SET GLOBAL FOREIGN_KEY_CHECKS = 0;
 
 --- Lấy tất cả chuyến đi:
 
-
-
-
-
-
-
-
-
-
+// Khởi tạo project:
++ npm init
+install nodemon --save-dev
+https://socket.io/get-started
