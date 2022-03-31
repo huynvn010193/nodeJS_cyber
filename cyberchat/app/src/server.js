@@ -25,8 +25,8 @@ io.on("connection", (socket) => {
   // nhận lại sự kiện từ client
   socket.on("send increment client to server", () => {
     count++;
-    console.log(count);
-    socket.emit("send count server to client", count);
+    // socket.emit("send count server to client", count);
+    io.emit("send count server to client", count);
   });
 
   //truyền count từ server về client
