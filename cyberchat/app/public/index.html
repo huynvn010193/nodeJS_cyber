@@ -7,30 +7,35 @@
   <title>Cyber Chat</title>
 </head>
 <body>
-  <h1>CyberChat</h1>
-  <p>count: 
-    <span id="value-count" id="valueCount">1</span>
-  </p>
-  <button id="btn-increment">+1</button>
+  <main>
+    <h1>CyberChat</h1>
+    <form id="form-message">
+      <input type="text" id="input-message" />
+      <button type="submit">
+        Gửi
+      </button>
+    </form>
+  </main>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/client-chat.js"></script>
   <script>
     // yêu cầu server kết nối với client
-    const socket = io();
+    // const socket = io();
 
     // nhận lại biến event từ server gửi về client
-    socket.on("send count server to client", (count) => {
-      console.log("đã nhận được count: ", count);
-      document.getElementById("value-count").innerHTML = count;
-    });
+    // socket.on("send count server to client", (count) => {
+    //   console.log("đã nhận được count: ", count);
+    //   document.getElementById("value-count").innerHTML = count;
+    // });
 
     // socket.on("send message server to client", (message) => {
     //   console.log("đã nhận được message: ", message);
     // });
 
-    document.getElementById("btn-increment").addEventListener("click", () => {
-      // gửi sự kiện từ client lên server to client
-      socket.emit("send increment client to server")
-    });
+    // document.getElementById("btn-increment").addEventListener("click", () => {
+    //   // gửi sự kiện từ client lên server to client
+    //   socket.emit("send increment client to server")
+    // });
 
   </script>
 </body>

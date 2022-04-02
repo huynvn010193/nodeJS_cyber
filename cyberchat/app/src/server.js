@@ -20,18 +20,20 @@ const message = "chào mọi người";
 
 // lắng nghẹ sự kiện kết nối từ client
 io.on("connection", (socket) => {
-  console.log("new client connect");
-
   // nhận lại sự kiện từ client
-  socket.on("send increment client to server", () => {
-    count++;
-    // socket.emit("send count server to client", count);
-    io.emit("send count server to client", count);
-  });
+  // socket.on("send increment client to server", () => {
+  //   count++;
+  //   // socket.emit("send count server to client", count);
+  //   io.emit("send count server to client", count);
+  // });
 
   //truyền count từ server về client
-  socket.emit("send count server to client", count);
-  socket.emit("send message server to client", message);
+  // socket.emit("send count server to client", count);
+  // socket.emit("send message server to client", message);
+
+  socket.on("send message from client to server", (messageText) => {
+    io.emit("send message from server to client", messageText);
+  });
 
   socket.on("disconnect", () => {
     console.log("client left server");
