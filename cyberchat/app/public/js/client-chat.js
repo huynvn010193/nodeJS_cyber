@@ -22,7 +22,20 @@ socket.on("send message from server to client", (messageText) => {
 
 // Gửi vị trí
 document.getElementById("btn-share-location").addEventListener("click", () => {
+  if (!navigator.geolocation) {
+    return alert("Trình duyệt không hỗ trợ tìm vị trí");
+  }
+  console.log(navigator);
   navigator.geolocation.getCurrentPosition((position) => {
     console.log(position);
+    const { latitude, longitude } = position.coords;
+    socket.emit("share location from client to server", {
+      latitude,
+      longitude,
+    });
   });
+});
+
+socket.on("share location from server to client", (linkLocation) => {
+  console.log("linkLocation", linkLocation);
 });

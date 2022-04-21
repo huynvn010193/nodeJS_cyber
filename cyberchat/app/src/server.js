@@ -33,22 +33,34 @@ io.on("connection", (socket) => {
   // socket.emit("send message server to client", message);
 
   // Gửi cho client vừa kết nối vào.
-  socket.emit("send message from server to client", "Chào mừng bạn đến với Cyber chat");
+  socket.emit(
+    "send message from server to client",
+    "Chào mừng bạn đến với Cyber chat"
+  );
 
   // Gửi cho các client còn lại trừ clien đã gửi lên
   socket.broadcast.emit(
-    "send message from server to client", 
+    "send message from server to client",
     "Có một Client vừa tham gia vào CyberChat"
   );
 
   socket.on("send message from client to server", (messageText, callback) => {
     const filter = new Filter();
-    if(filter.isProfane(messageText)) {
+    if (filter.isProfane(messageText)) {
       return callback("messageText không hợp lệ vì có những từ khoá tục tĩu");
     }
     io.emit("send message from server to client", messageText);
     callback();
   });
+
+  // Xử lý chia sẽ vị trí
+  socket.on(
+    "share location from client to server",
+    ({ latitude, longitude }) => {
+      const linkLocation = `https://www.google.com/maps?query=${latitude},${longitude}`;
+      io.emit("share location from server to client", linkLocation);
+    }
+  );
 
   socket.on("disconnect", () => {
     console.log("client left server");
