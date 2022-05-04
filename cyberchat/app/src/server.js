@@ -6,6 +6,8 @@ const socketio = require("socket.io");
 const Filter = require("bad-words");
 // sử dụng static file đưa index.html
 const publicPathDirectory = path.join(__dirname, "../public");
+const formatTime = require("date-format");
+const createMessages = require("./utils/create-messages");
 
 // set vầy tự động vô thư mục public và kiếm index.html chạy trc
 app.use(express.static(publicPathDirectory));
@@ -41,7 +43,8 @@ io.on("connection", (socket) => {
   // Gửi cho các client còn lại trừ clien đã gửi lên
   socket.broadcast.emit(
     "send message from server to client",
-    "Có một Client vừa tham gia vào CyberChat"
+    createMessages("Có một Client vừa tham gia vào CyberChat")
+    // "Có một Client vừa tham gia vào CyberChat"
   );
 
   socket.on("send message from client to server", (messageText, callback) => {
@@ -49,7 +52,9 @@ io.on("connection", (socket) => {
     if (filter.isProfane(messageText)) {
       return callback("messageText không hợp lệ vì có những từ khoá tục tĩu");
     }
-    io.emit("send message from server to client", messageText);
+    const message = createMessages(messageText);
+
+    io.emit("send message from server to client", message);
     callback();
   });
 
