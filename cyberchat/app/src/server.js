@@ -47,32 +47,43 @@ io.on("connection", (socket) => {
     // "Có một Client vừa tham gia vào CyberChat"
   );
 
-  socket.on("send message from client to server", (messageText, callback) => {
-    const filter = new Filter();
-    if (filter.isProfane(messageText)) {
-      return callback("messageText không hợp lệ vì có những từ khoá tục tĩu");
-    }
-    const message = createMessages(messageText);
-
-    io.emit("send message from server to client", message);
-    callback();
-  });
-
-  // Xử lý chia sẽ vị trí
-  socket.on(
-    "share location from client to server",
-    ({ latitude, longitude }) => {
-      const linkLocation = `https://www.google.com/maps?query=${latitude},${longitude}`;
-      io.emit("share location from server to client", linkLocation);
-    }
-  );
-
+  // ngắt kết nối từ phía client
   socket.on("disconnect", () => {
     console.log("client left server");
   });
+
+  // lắng nghe sự kiện chia room
+  socket.on("join room clien from to server",({ room, username }) => {
+    socket.join(room);
+
+    // chat
+    socket.on("send message from client to server", (messageText, callback) => {
+      const filter = new Filter();
+      if (filter.isProfane(messageText)) {
+        return callback("messageText không hợp lệ vì có những từ khoá tục tĩu");
+      }
+      const message = createMessages(messageText);
+
+      io.to(room).emit("send message from server to client", message);
+      callback();
+    });
+
+    // Xử lý chia sẽ vị trí
+    socket.on(
+      "share location from client to server",
+      ({ latitude, longitude }) => {
+        const linkLocation = `https://www.google.com/maps?query=${latitude},${longitude}`;
+        io.emit("share location from server to client", linkLocation);
+      }
+    );
+
+  });
+
 });
 
-// ngắt kết nối từ phía client
+
+
+
 
 const port = 4567;
 server.listen(port, () => {

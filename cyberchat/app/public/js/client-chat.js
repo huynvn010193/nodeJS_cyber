@@ -44,5 +44,7 @@ socket.on("share location from server to client", (linkLocation) => {
 const queryString = location.search;
 // parse params ra object, ignoreQueryPrefix => loại bỏ "?"
 const params = Qs.parse(queryString, { ignoreQueryPrefix:true });
-console.log("🚀 ~ file: client-chat.js ~ line 46 ~ params", params)
+const { room, username } = params;
+
+socket.emit("join room clien from to server", { room, username });
 
