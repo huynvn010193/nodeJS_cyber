@@ -39,3 +39,10 @@ document.getElementById("btn-share-location").addEventListener("click", () => {
 socket.on("share location from server to client", (linkLocation) => {
   console.log("linkLocation", linkLocation);
 });
+
+// xử lý query string
+const queryString = location.search;
+// parse params ra object, ignoreQueryPrefix => loại bỏ "?"
+const params = Qs.parse(queryString, { ignoreQueryPrefix:true });
+console.log("🚀 ~ file: client-chat.js ~ line 46 ~ params", params)
+
