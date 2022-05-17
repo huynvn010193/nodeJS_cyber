@@ -35,17 +35,7 @@ io.on("connection", (socket) => {
   // socket.emit("send message server to client", message);
 
   // Gửi cho client vừa kết nối vào.
-  socket.emit(
-    "send message from server to client",
-    "Chào mừng bạn đến với Cyber chat"
-  );
-
-  // Gửi cho các client còn lại trừ clien đã gửi lên
-  socket.broadcast.emit(
-    "send message from server to client",
-    createMessages("Có một Client vừa tham gia vào CyberChat")
-    // "Có một Client vừa tham gia vào CyberChat"
-  );
+  
 
   // ngắt kết nối từ phía client
   socket.on("disconnect", () => {
@@ -55,6 +45,18 @@ io.on("connection", (socket) => {
   // lắng nghe sự kiện chia room
   socket.on("join room clien from to server",({ room, username }) => {
     socket.join(room);
+
+    socket.emit(
+      "send message from server to client",
+      `Chào mừng bạn đến với phòng ${room}`
+    );
+  
+    // Gửi cho các client còn lại trừ clien đã gửi lên
+    socket.broadcast.to(room).emit(
+      "send message from server to client",
+      createMessages(`client ${username} vừa tham gia vào phòng ${room}`)
+      // "Có một Client vừa tham gia vào CyberChat"
+    );
 
     // chat
     socket.on("send message from client to server", (messageText, callback) => {
@@ -73,7 +75,7 @@ io.on("connection", (socket) => {
       "share location from client to server",
       ({ latitude, longitude }) => {
         const linkLocation = `https://www.google.com/maps?query=${latitude},${longitude}`;
-        io.emit("share location from server to client", linkLocation);
+        io.to(room).emit("share location from server to client", linkLocation);
       }
     );
 

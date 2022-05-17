@@ -25,7 +25,6 @@ document.getElementById("btn-share-location").addEventListener("click", () => {
   if (!navigator.geolocation) {
     return alert("Trình duyệt không hỗ trợ tìm vị trí");
   }
-  console.log(navigator);
   navigator.geolocation.getCurrentPosition((position) => {
     console.log(position);
     const { latitude, longitude } = position.coords;
