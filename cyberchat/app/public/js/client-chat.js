@@ -42,8 +42,14 @@ socket.on("share location from server to client", (linkLocation) => {
 // xử lý query string
 const queryString = location.search;
 // parse params ra object, ignoreQueryPrefix => loại bỏ "?"
-const params = Qs.parse(queryString, { ignoreQueryPrefix:true });
+const params = Qs.parse(queryString, { ignoreQueryPrefix: true });
 const { room, username } = params;
 
 socket.emit("join room clien from to server", { room, username });
 
+// Xử lý userList
+socket.on("send userList from server to client", (userList) => {
+  console.log(userList);
+});
+
+socket;

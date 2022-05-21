@@ -95,6 +95,9 @@ SET GLOBAL FOREIGN_KEY_CHECKS = 0;
 install nodemon --save-dev
 https://socket.io/get-started
 
+client: do client chỉ tưởng tác với 1 server nên dùng socket
+-> còn server do thao tác với nhiều client
+
 ---- Broadcasting
 
 
