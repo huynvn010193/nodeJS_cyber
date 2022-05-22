@@ -8,7 +8,7 @@ const Filter = require("bad-words");
 const publicPathDirectory = path.join(__dirname, "../public");
 const formatTime = require("date-format");
 const createMessages = require("./utils/create-messages");
-const { getUserList } = require("./utils/users");
+const { getUserList, addUser } = require("./utils/users");
 
 // set vầy tự động vô thư mục public và kiếm index.html chạy trc
 app.use(express.static(publicPathDirectory));
@@ -80,6 +80,13 @@ io.on("connection", (socket) => {
     );
 
     // Xử lý userList
+    const newUser = {
+      id: socket.id,
+      username,
+      room,
+    };
+
+    addUser(newUser);
     io.to(room).emit("send userList from server to client", getUserList(room));
   });
 });
