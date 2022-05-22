@@ -8,7 +8,7 @@ const Filter = require("bad-words");
 const publicPathDirectory = path.join(__dirname, "../public");
 const formatTime = require("date-format");
 const createMessages = require("./utils/create-messages");
-const { getUserList, addUser } = require("./utils/users");
+const { getUserList, addUser, removeUser } = require("./utils/users");
 
 // set vầy tự động vô thư mục public và kiếm index.html chạy trc
 app.use(express.static(publicPathDirectory));
@@ -36,11 +36,6 @@ io.on("connection", (socket) => {
   // socket.emit("send message server to client", message);
 
   // Gửi cho client vừa kết nối vào.
-
-  // ngắt kết nối từ phía client
-  socket.on("disconnect", () => {
-    console.log("client left server");
-  });
 
   // lắng nghe sự kiện chia room
   socket.on("join room clien from to server", ({ room, username }) => {
@@ -88,7 +83,17 @@ io.on("connection", (socket) => {
 
     addUser(newUser);
     io.to(room).emit("send userList from server to client", getUserList(room));
+
+
+    // ngắt kết nối từ phía client
+    socket.on("disconnect", () => {
+      removeUser(socket.id);
+      io.to(room).emit("send userList from server to client", getUserList(room));
+      console.log("client left server");
+    });
+
   });
+
 });
 
 const port = 4567;
