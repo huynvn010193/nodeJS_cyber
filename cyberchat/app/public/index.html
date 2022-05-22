@@ -7,7 +7,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" media="all">
-
+  <link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
   <main class="app">
@@ -16,7 +16,54 @@
     </h1>
     <section class="chat-app">
       <section class="row char-app__wrapper container">
-        
+        <section class="col-lg-6 chat-app__left">
+          <img
+            class="chat-app__image" 
+            src="data:image/png;base64,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"
+            alt=""
+          />
+        </section>
+        <section class="col-lg-6 chat-app__right">
+          <h2 class="chat-app__title">Tham gia phòng chat</h2>
+          <div class="chat-app__title--line"></div>
+          <form action="/chat.html">
+            <div class="form-group">
+              <div class="input-group mb-3 input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-comment-alt"></i>
+                  </span>
+                </div>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="room"
+                  id="room"
+                  placeholder="room"
+                  />
+              </div>
+              <div class="input-group mb-3 input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-user-alt"></i>
+                  </span>
+                </div>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="username"
+                  />
+              </div>
+              <div class="text-center">
+                <button type="submit" class="chat-app__btn-join">
+                  Tham gia
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
       </section>
     </section>
   </main>
