@@ -1,6 +1,6 @@
 // yêu cầu server kết nối với client
 const socket = io();
-document.getElementById("form-message").addEventListener("submit", (e) => {
+document.getElementById("form-messages").addEventListener("submit", (e) => {
   e.preventDefault();
   const messageText = document.getElementById("input-message").value;
   const acknowledgements = (errors) => {
@@ -47,9 +47,16 @@ const { room, username } = params;
 
 socket.emit("join room clien from to server", { room, username });
 
+// hiển thị tên phòng lên trên màn hình
+document.getElementById("app__title").innerHTML = room;
+
 // Xử lý userList
 socket.on("send userList from server to client", (userList) => {
-  console.log(userList);
+  let contentHTML = '';
+  userList.map((user) => {
+    contentHTML += `<li class="app__item-user">${user.username}</li>`
+  });
+  document.getElementById("app__list-user--content").innerHTML = contentHTML;
 });
 
 socket;
