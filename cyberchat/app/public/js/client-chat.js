@@ -2,7 +2,8 @@
 const socket = io();
 document.getElementById("form-messages").addEventListener("submit", (e) => {
   e.preventDefault();
-  const messageText = document.getElementById("input-message").value;
+  console.log("submit");
+  const messageText = document.getElementById("input-messages").value;
   const acknowledgements = (errors) => {
     if (errors) {
       return alert("tin nhắn không hợp lệ");
@@ -17,7 +18,24 @@ document.getElementById("form-messages").addEventListener("submit", (e) => {
 });
 
 socket.on("send message from server to client", (message) => {
-  console.log("messageText", message);
+  console.log("messageText 1", message);
+  const { createdAt, messageText } = message;
+  console.log({ createdAt, messageText });
+  // hiển thị lên màn hình
+  const messageElemt = `
+    <div class="message-item">
+      <div class="message__row1">
+        <div class="message__name">Nguyễn Phong Hào</div>
+        <div class="message__date">${createdAt}</div>
+      </div>
+      <div class="message__row2">
+        <p class="message__content">
+          ${messageText}
+        </p>
+      </div>
+    </div>
+  `
+  document.getElementById("app__messages").innerHTML += messageElemt;
 });
 
 // Gửi vị trí

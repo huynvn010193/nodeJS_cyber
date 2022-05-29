@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
 
     socket.emit(
       "send message from server to client",
-      `Chào mừng bạn đến với phòng ${room}`
+      createMessages(`Chào mừng bạn đến với phòng ${room}`)
     );
 
     // Gửi cho các client còn lại trừ clien đã gửi lên
