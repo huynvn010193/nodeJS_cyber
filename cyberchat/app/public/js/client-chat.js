@@ -18,14 +18,12 @@ document.getElementById("form-messages").addEventListener("submit", (e) => {
 });
 
 socket.on("send message from server to client", (message) => {
-  console.log("messageText 1", message);
-  const { createdAt, messageText } = message;
-  console.log({ createdAt, messageText });
+  const { createdAt, messageText, username } = message;
   // hiển thị lên màn hình
   const messageElemt = `
     <div class="message-item">
       <div class="message__row1">
-        <div class="message__name">Nguyễn Phong Hào</div>
+      <div class="message__name">${username}</div>
         <div class="message__date">${createdAt}</div>
       </div>
       <div class="message__row2">
@@ -34,7 +32,7 @@ socket.on("send message from server to client", (message) => {
         </p>
       </div>
     </div>
-  `
+  `;
   document.getElementById("app__messages").innerHTML += messageElemt;
 });
 
@@ -44,7 +42,6 @@ document.getElementById("btn-share-location").addEventListener("click", () => {
     return alert("Trình duyệt không hỗ trợ tìm vị trí");
   }
   navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position);
     const { latitude, longitude } = position.coords;
     socket.emit("share location from client to server", {
       latitude,
@@ -53,8 +50,25 @@ document.getElementById("btn-share-location").addEventListener("click", () => {
   });
 });
 
-socket.on("share location from server to client", (linkLocation) => {
-  console.log("linkLocation", linkLocation);
+socket.on("share location from server to client", (data) => {
+  const { createdAt, messageText, username } = data;
+  console.log({ createdAt, messageText, username });
+  const htmlContent = document.getElementById("app__messages").innerHTML;
+  const messageElemt = `
+    <div class="message-item">
+      <div class="message__row1">
+        <div class="message__name">${username}</div>
+        <div class="message__date">${createdAt}</div>
+      </div>
+      <div class="message__row2">
+        <p class="message__content">
+          <a href="${messageText}" target="blank">Vị trí của ${username}</a>          
+        </p>
+      </div>
+    </div>
+  `;
+  let contentRender = htmlContent + messageElemt;
+  document.getElementById("app__messages").innerHTML = contentRender;
 });
 
 // xử lý query string
@@ -70,9 +84,9 @@ document.getElementById("app__title").innerHTML = room;
 
 // Xử lý userList
 socket.on("send userList from server to client", (userList) => {
-  let contentHTML = '';
+  let contentHTML = "";
   userList.map((user) => {
-    contentHTML += `<li class="app__item-user">${user.username}</li>`
+    contentHTML += `<li class="app__item-user">${user.username}</li>`;
   });
   document.getElementById("app__list-user--content").innerHTML = contentHTML;
 });

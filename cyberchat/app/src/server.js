@@ -8,7 +8,7 @@ const Filter = require("bad-words");
 const publicPathDirectory = path.join(__dirname, "../public");
 const formatTime = require("date-format");
 const createMessages = require("./utils/create-messages");
-const { getUserList, addUser, removeUser } = require("./utils/users");
+const { getUserList, addUser, removeUser, findUser } = require("./utils/users");
 
 // set vầy tự động vô thư mục public và kiếm index.html chạy trc
 app.use(express.static(publicPathDirectory));
@@ -43,13 +43,16 @@ io.on("connection", (socket) => {
 
     socket.emit(
       "send message from server to client",
-      createMessages(`Chào mừng bạn đến với phòng ${room}`)
+      createMessages(`Chào mừng bạn đến với phòng ${room}`, username)
     );
 
     // Gửi cho các client còn lại trừ clien đã gửi lên
     socket.broadcast.to(room).emit(
       "send message from server to client",
-      createMessages(`client ${username} vừa tham gia vào phòng ${room}`)
+      createMessages(
+        `client ${username} vừa tham gia vào phòng ${room}`,
+        username
+      )
       // "Có một Client vừa tham gia vào CyberChat"
     );
 
@@ -59,7 +62,7 @@ io.on("connection", (socket) => {
       if (filter.isProfane(messageText)) {
         return callback("messageText không hợp lệ vì có những từ khoá tục tĩu");
       }
-      const message = createMessages(messageText);
+      const message = createMessages(messageText, username);
 
       io.to(room).emit("send message from server to client", message);
       callback();
@@ -70,7 +73,14 @@ io.on("connection", (socket) => {
       "share location from client to server",
       ({ latitude, longitude }) => {
         const linkLocation = `https://www.google.com/maps?query=${latitude},${longitude}`;
-        io.to(room).emit("share location from server to client", linkLocation);
+        // const id = socket.id;
+        // const user = findUser(id);
+
+        console.log({ username });
+        io.to(room).emit(
+          "share location from server to client",
+          createMessages(linkLocation, username)
+        );
       }
     );
 
@@ -84,16 +94,16 @@ io.on("connection", (socket) => {
     addUser(newUser);
     io.to(room).emit("send userList from server to client", getUserList(room));
 
-
     // ngắt kết nối từ phía client
     socket.on("disconnect", () => {
       removeUser(socket.id);
-      io.to(room).emit("send userList from server to client", getUserList(room));
+      io.to(room).emit(
+        "send userList from server to client",
+        getUserList(room)
+      );
       console.log("client left server");
     });
-
   });
-
 });
 
 const port = 4567;
