@@ -2,6 +2,9 @@ const http = require('http');
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
+
 const courses = [
   { id: 1, name: 'NodeJS'},
   { id: 2, name: 'ReactJS'},
@@ -39,6 +42,17 @@ app.get('/api/courses/:id', (req, res) => {
   const course = courses.find((course => course.id === parseInt(req.params.id)));
   if(!course) res.status(404).send("Id không tồn tại");
   res.send(course);
+});
+
+app.post('/api/courses/add', (req, res) => {
+  const { id, name } = req.body;
+  const course = { id, name };
+  courses.push(course);
+  res.send(JSON.stringify({
+    success: true,
+    notice: "Bạn đã thêm thành công!",
+    data: courses
+  }));
 });
 
 const PORT = process.env.PORT || 4000;
