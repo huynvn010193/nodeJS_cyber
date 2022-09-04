@@ -55,5 +55,28 @@ app.post('/api/courses/add', (req, res) => {
   }));
 });
 
+app.put('/api/courses/edit/:id', (req, res) => {
+  const { name } = req.body;
+  const course = courses.find((course => course.id === parseInt(req.params.id)));
+  course.name = name;
+  res.send(JSON.stringify({
+    success: true,
+    notice: "Bạn đã cập nhật thành công!",
+    data: courses
+  }));
+});
+
+app.delete('/api/courses/delete/:id', (req, res) => {
+  const { id } = req.params
+  const course = courses.find((course => course.id === parseInt(id)));
+  const index = courses.indexOf(course);
+  courses.splice(index, 1);
+  res.send(JSON.stringify({
+    success: true,
+    notice: "Bạn đã xoá thành công!",
+    data: courses
+  }));
+});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server running on Port ${PORT}`));
